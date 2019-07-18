@@ -19,3 +19,9 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Do not commit Firebase config
+.env.development
+firebase-debug.log
+
+.firebase/*
