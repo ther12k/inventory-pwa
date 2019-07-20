@@ -2,6 +2,7 @@
   "name": "inventory-pwa",
   "version": "0.1.0",
   "private": true,
+  "description": "Inventory Persistent WebApp in VueJS, TypeScript, Vuetify and Firebase",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -32,6 +33,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "typescript": "^3.4.3",
+    "vue-cli-plugin-pwa": "^1.0.0-alpha.1",
     "vue-cli-plugin-vuetify": "^0.5.0",
     "vue-template-compiler": "^2.6.10"
   },
@@ -63,5 +65,10 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 10"
-  ]
+  ],
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bertoluzza/inventory-pwa.git"
+  }
 }

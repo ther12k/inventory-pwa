@@ -38,6 +38,7 @@ Vuex: state manager -->
 $ npm install --save-dev typescript webpack ts-loader css-loader vue vue-loader vue-template-compiler
 
 $ npm install -g @vue-cli # vue v3
+$ vue add pwa # https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa#installing-in-an-already-created-project
 $ vue create inventory-pwa
 # Manually select features: Babel, Typescript, PWA, Router, Vuex, Linter=PrettierOnSave, config in package.json
 
@@ -49,7 +50,6 @@ $ npm install firebase --save
 $ npm install -g firebase-tools
 
 $ firebase init
-$ firebase deploy --only hosting
 
 # Easy dialogs and toasts
 $ npm install vuetify-dialog
@@ -63,6 +63,19 @@ $ npm run lint
 ### Compiles and hot-reloads for development (Starting development server...)
 ```
 $ npm run serve 
+```
+
+### Run local server
+```
+$ npm run build
+# Refresh browser cache: crtl + shift + R
+$ firebase serve
+```
+### Deployment on Firebase
+```
+$ firebase deploy
+# or
+$ firebase deploy --only hosting
 ```
 
 ### Firebase configuration

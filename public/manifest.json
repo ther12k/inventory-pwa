@@ -1,7 +1,6 @@
 {
   "name": "Inventory",
-  "short_name": "Inventory",
-  "scope": "./",
+  "short_name": "Inv",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
@@ -17,5 +16,5 @@
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#000000",
-  "theme_color": "#1976d2"
+  "theme_color": "#1976D2"
 }

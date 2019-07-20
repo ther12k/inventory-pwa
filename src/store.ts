@@ -6,11 +6,6 @@ import firebase from 'firebase';
 
 Vue.use(Vuex);
 
-// https://github.com/yariksav/vuetify-dialog
-import VuetifyDialog from 'vuetify-dialog';
-import 'vuetify-dialog/dist/vuetify-dialog.css';
-Vue.use(VuetifyDialog);
-
 export default new Vuex.Store({
     state: {
         user: null,
@@ -31,9 +26,6 @@ export default new Vuex.Store({
         setError(state, payload) {
             state.error = payload;
         }
-        // setSnack(state, snack) {
-        //     state.snack = snack;
-        // }
     },
     actions: {
         signUpAction({ commit }, payload) {
