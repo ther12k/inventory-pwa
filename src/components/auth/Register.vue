@@ -7,11 +7,6 @@ https://medium.com/javascript-in-plain-english/how-to-implement-a-showcase-web-a
         <v-layout align-center justify-center app>
             <v-flex xs12 sm8 md4>
                 <v-card class="elevation-12">
-                    <v-btn @click="notification('error', 'Error message')"
-                        >Show error</v-btn
-                    >
-                    <v-btn @click="notification()">Show default message</v-btn>
-
                     <v-toolbar dark color="primary" class="pr-3">
                         <v-toolbar-title>Sign up</v-toolbar-title>
                     </v-toolbar>
@@ -45,7 +40,6 @@ https://medium.com/javascript-in-plain-english/how-to-implement-a-showcase-web-a
                             <v-text-field
                                 v-model="confirmPassword"
                                 label="Confirm the password"
-                                :rules="passwordConfirmationRules"
                                 required
                                 prepend-icon="lock"
                                 :error-messages="emailMatchError()"
@@ -84,7 +78,7 @@ https://medium.com/javascript-in-plain-english/how-to-implement-a-showcase-web-a
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+// import { mapMutations } from 'vuex';
 
 export default {
     name: 'Register',
@@ -108,10 +102,6 @@ export default {
     }),
 
     methods: {
-        ...mapMutations({
-            notification: 'setStatus' // map `this.notification()` to `this.$store.commit('setStatus')`
-        }),
-
         validate() {
             if (this.$refs.form.validate()) {
                 this.registerWithFirebase();
@@ -120,15 +110,6 @@ export default {
 
         reset() {
             this.$refs.form.reset();
-        },
-
-        registerWithFirebase() {
-            const user = {
-                email: this.email,
-                password: this.password
-            };
-
-            this.$store.dispatch('signUpAction', user);
         },
 
         emailMatchError() {
@@ -146,12 +127,32 @@ export default {
         ) {
             // fixme: change font, https://github.com/yariksav/vuetify-dialog/issues/12
             // text = '<span style="font-size: 24px">'+text+'</span>'
-            //text = '<span>'+text+'</span>'
+            // text = '<span>'+text+'</span>'
             this.$dialog.notify[type](text, {
                 position: position,
                 timeout: timeout
             });
+        },
+
+        registerWithFirebase() {
+            const user = {
+                email: this.email,
+                password: this.password
+            };
+            var self = this;
+            this.$store.dispatch('signUpAction', user).then(
+                function(result) {
+                    //console.info(result); // "Stuff worked!"
+                    self.notification('success', result);
+                }
+            ).catch(
+                function(err) {
+                    //console.error('signUpAction-err = '+err); // Error: "It broke"
+                    self.notification('error', err);
+                }
+            );
         }
+
     }
 };
 </script>

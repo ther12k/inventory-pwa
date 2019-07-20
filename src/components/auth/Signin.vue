@@ -90,8 +90,34 @@ export default {
                 email: this.email,
                 password: this.password
             };
-            this.$store.dispatch('signInAction', user);
-        }
+            var self = this;
+            this.$store.dispatch('signInAction', user).then(
+                function(result) {
+                    self.notification('success', result);
+                }
+            ).catch(
+                function(err) {
+                    self.notification('error', err);
+                }
+            );
+        },
+
+        // FIXME: common to register.vue
+        notification(
+            type = 'info',
+            text = 'Sample notification text',
+            position = 'top-right',
+            timeout = 5000
+        ) {
+            // fixme: change font, https://github.com/yariksav/vuetify-dialog/issues/12
+            // text = '<span style="font-size: 24px">'+text+'</span>'
+            // text = '<span>'+text+'</span>'
+            this.$dialog.notify[type](text, {
+                position: position,
+                timeout: timeout
+            });
+        },
+
     }
 };
 </script>
