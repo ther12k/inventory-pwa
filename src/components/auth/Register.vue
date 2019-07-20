@@ -7,7 +7,7 @@ https://medium.com/javascript-in-plain-english/how-to-implement-a-showcase-web-a
         <v-layout align-center justify-center app>
             <v-flex xs12 sm8 md4>
                 <v-card class="elevation-12">
-                    <v-btn @click="notification('warning', 'Error message')"
+                    <v-btn @click="notification('error', 'Error message')"
                         >Show error</v-btn
                     >
                     <v-btn @click="notification()">Show default message</v-btn>
@@ -45,9 +45,10 @@ https://medium.com/javascript-in-plain-english/how-to-implement-a-showcase-web-a
                             <v-text-field
                                 v-model="confirmPassword"
                                 label="Confirm the password"
-                                :rules="passwordRules"
+                                :rules="passwordConfirmationRules"
                                 required
                                 prepend-icon="lock"
+                                :error-messages="emailMatchError()"
                                 :append-icon="
                                     confirmPasswordShow
                                         ? 'visibility'
@@ -83,7 +84,10 @@ https://medium.com/javascript-in-plain-english/how-to-implement-a-showcase-web-a
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+
 export default {
+    name: 'Register',
     data: () => ({
         passwordShow: false,
         confirmPasswordShow: false,
@@ -95,14 +99,19 @@ export default {
             v => !!v || 'E-mail is required',
             // email regex from https://stackoverflow.com/a/46181
             v =>
-                /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+                //eslint-disable-next-line
+                /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test( //eslint-disable-line
                     v
                 ) || 'E-mail must be valid'
         ],
-        passwordRules: [v => !!v || 'Password and Confirm password Required']
+        passwordRules: [v => !!v || 'Password Required']
     }),
 
     methods: {
+        ...mapMutations({
+            notification: 'setStatus' // map `this.notification()` to `this.$store.commit('setStatus')`
+        }),
+
         validate() {
             if (this.$refs.form.validate()) {
                 this.registerWithFirebase();
@@ -113,16 +122,20 @@ export default {
             this.$refs.form.reset();
         },
 
-        async registerWithFirebase() {
+        registerWithFirebase() {
             const user = {
                 email: this.email,
                 password: this.password
             };
 
-            res = await this.$store.dispatch('signUpAction', user); //.then(() => {
-            //    console.log('signUpAction then')
-            //});
-            console.log('res');
+            this.$store.dispatch('signUpAction', user);
+        },
+
+        emailMatchError() {
+            //https://stackoverflow.com/a/51483271/4940084
+            return this.password === this.confirmPassword
+                ? ''
+                : 'Email must match';
         },
 
         notification(

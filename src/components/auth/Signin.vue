@@ -65,9 +65,9 @@ export default {
         password: 'password',
         emailRules: [
             v => !!v || 'E-mail is required',
-            // email regex from https://stackoverflow.com/a/46181
+            //email regex from https://stackoverflow.com/a/46181
             v =>
-                /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+                /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test( //eslint-disable-line
                     v
                 ) || 'E-mail must be valid'
         ],

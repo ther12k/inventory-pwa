@@ -7,15 +7,27 @@ An inventory app based on vue.js, typescript, vuetify and firebase ([Live demo](
 - [ ] Notifications font customization
 - [ ] Inventory data table view
 - [ ] Inventory operations w/ firebase firestore
-- [ ] Bugfix registration password
+- [X] Bugfix registration password
 - [ ] Barcodes camera scanner using firebase
 
 ## Project setup
 <!-- Already done. -->
 
-<!-- ## Screenshot
-![alt text](./screenshot/login.png)
-Login page* -->
+<!-- ## Screenshot -->
+<!-- ![alt text](./screenshot/login.png)
+*Login page*
+
+|<img src="screenshot/login.png" width="250">|
+|:--:| 
+| *Login page* |
+
+![alttext](screenshot/login.png "Login page") -->
+
+<!-- <p>
+    <img src="screenshot/login.png" alt="Login page"/>
+    <br>
+    <em>Login page</em>
+</p> -->
 
 <!-- Webpack is a module bundler for Javascript applications
 Vuex: state manager -->

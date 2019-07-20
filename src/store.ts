@@ -36,7 +36,7 @@ export default new Vuex.Store({
         // }
     },
     actions: {
-        async signUpAction({ commit }, payload) {
+        signUpAction({ commit }, payload) {
             commit('setStatus', 'loading');
             commit('setError', null); //reset every trial
             firebase
@@ -53,17 +53,16 @@ export default new Vuex.Store({
                     commit('setStatus', 'success');
                     commit('setError', null);
                     // commit('setSnack', 'sign up success');
-                    console.log('signUpAction = ' + response);
-                    // this.$toast('Default toast')
+                    console.log('signUpAction ok = ' + response);
                 })
                 .catch(error => {
                     commit('setStatus', 'failure');
                     commit('setError', error.message);
+                    this;
                     // commit('setSnack', '<b>Sign up Error</b><br>' + error.message + '[code= ' + error.code +']');
                     // this.$toast('Default toast');
-                    console.log('signUpAction = ' + error);
+                    console.log('signUpAction err = ' + error);
                 });
-            return 'signUpAction return';
         },
 
         signInAction({ commit }, payload) {
