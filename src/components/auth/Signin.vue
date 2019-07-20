@@ -91,15 +91,14 @@ export default {
                 password: this.password
             };
             var self = this;
-            this.$store.dispatch('signInAction', user).then(
-                function(result) {
+            this.$store
+                .dispatch('signInAction', user)
+                .then(function(result) {
                     self.notification('success', result);
-                }
-            ).catch(
-                function(err) {
+                })
+                .catch(function(err) {
                     self.notification('error', err);
-                }
-            );
+                });
         },
 
         // FIXME: common to register.vue
@@ -116,8 +115,7 @@ export default {
                 position: position,
                 timeout: timeout
             });
-        },
-
+        }
     }
 };
 </script>

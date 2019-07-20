@@ -1,11 +1,12 @@
 // source:
 https://github.com/anoobbava/showcase/blob/master/src/views/NavBar.vue
 <template>
+    <!-- FIXME: https://bootstrap-vue.js.org/docs/components/navbar/ responsive on small screens??  or remove texts on overflow -->
     <!-- display the navigation bar -->
-    <v-toolbar color="primary" dark>
+    <v-toolbar color="primary" class="navbar" app dark>
         <v-spacer></v-spacer>
         <!-- navigation bar links -->
-        <v-toolbar-items class="hidden-xs-only" v-if="!userLogedIn">
+        <v-toolbar-items class="hidden-xs-only,navbar" v-if="!userLogedIn">
             <v-btn
                 flat
                 v-for="item in items"
@@ -19,7 +20,7 @@ https://github.com/anoobbava/showcase/blob/master/src/views/NavBar.vue
             <v-spacer></v-spacer>
         </v-toolbar-items>
         <!-- sign out button -->
-        <v-toolbar-items class="hidden-xs-only" v-else>
+        <v-toolbar-items class="hidden-xs-only,navbar" v-else>
             <v-btn flat @click="logoutFromFirebase">
                 <v-icon right>delete_sweep</v-icon>Logout
             </v-btn>

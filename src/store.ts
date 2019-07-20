@@ -74,7 +74,9 @@ export default new Vuex.Store({
 
         signInAction({ commit }, payload) {
             return new Promise((resolve, reject) => {
-                firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+                firebase
+                    .auth()
+                    .signInWithEmailAndPassword(payload.email, payload.password)
                     .then(response => {
                         const _uid = -1;
                         if (response.user != undefined) {
@@ -90,8 +92,7 @@ export default new Vuex.Store({
                         commit('setError', error.message);
                         reject('Failed sign-in: ' + error);
                     });
-                }
-            )
+            });
         },
 
         signOutAction({ commit }) {

@@ -140,19 +140,17 @@ export default {
                 password: this.password
             };
             var self = this;
-            this.$store.dispatch('signUpAction', user).then(
-                function(result) {
+            this.$store
+                .dispatch('signUpAction', user)
+                .then(function(result) {
                     //console.info(result); // "Stuff worked!"
                     self.notification('success', result);
-                }
-            ).catch(
-                function(err) {
+                })
+                .catch(function(err) {
                     //console.error('signUpAction-err = '+err); // Error: "It broke"
                     self.notification('error', err);
-                }
-            );
+                });
         }
-
     }
 };
 </script>
