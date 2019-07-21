@@ -119,21 +119,6 @@ export default {
                 : 'Email must match';
         },
 
-        notification(
-            type = 'info',
-            text = 'Sample notification text',
-            position = 'top-right',
-            timeout = 5000
-        ) {
-            // fixme: change font, https://github.com/yariksav/vuetify-dialog/issues/12
-            // text = '<span style="font-size: 24px">'+text+'</span>'
-            // text = '<span>'+text+'</span>'
-            this.$dialog.notify[type](text, {
-                position: position,
-                timeout: timeout
-            });
-        },
-
         registerWithFirebase() {
             const user = {
                 email: this.email,
@@ -143,12 +128,18 @@ export default {
             this.$store
                 .dispatch('signUpAction', user)
                 .then(function(result) {
-                    //console.info(result); // "Stuff worked!"
-                    self.notification('success', result);
+                    //console.info(result);
+                    self.$dialog.message.success('Successfull Sign-up', {
+                        position: 'bottom-right',
+                        timeout: 5000
+                    })
                 })
                 .catch(function(err) {
-                    //console.error('signUpAction-err = '+err); // Error: "It broke"
-                    self.notification('error', err);
+                    self.$dialog.error({
+                    text: '' + err,
+                    title: 'Failed Sign-up',
+                    persistent: false
+                    })
                 });
         }
     }

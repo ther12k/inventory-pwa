@@ -5,7 +5,6 @@ An inventory app based on vue.js, typescript, vuetify and firebase ([Live demo](
 - [X] Fix firebase hosting deployment
 - [X] Bugfix registration password
 - [X] Async sign-in/sign-up notification from store to UI
-- [ ] Notifications font customization
 - [ ] Inventory data table view
 - [ ] Inventory operations w/ firebase firestore
 - [ ] Barcodes camera scanner using firebase

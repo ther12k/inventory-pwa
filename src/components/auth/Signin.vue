@@ -94,28 +94,21 @@ export default {
             this.$store
                 .dispatch('signInAction', user)
                 .then(function(result) {
-                    self.notification('success', result);
+                    //console.info(result);
+                    self.$dialog.message.success('Successfull Sign-up', {
+                        position: 'bottom-right',
+                        timeout: 5000
+                    })
                 })
                 .catch(function(err) {
-                    self.notification('error', err);
+                    self.$dialog.error({
+                    text: '' + err,
+                    title: 'Failed Sign-in',
+                    persistent: false
+                    })
                 });
         },
 
-        // FIXME: common to register.vue
-        notification(
-            type = 'info',
-            text = 'Sample notification text',
-            position = 'top-right',
-            timeout = 5000
-        ) {
-            // fixme: change font, https://github.com/yariksav/vuetify-dialog/issues/12
-            // text = '<span style="font-size: 24px">'+text+'</span>'
-            // text = '<span>'+text+'</span>'
-            this.$dialog.notify[type](text, {
-                position: position,
-                timeout: timeout
-            });
-        }
     }
 };
 </script>

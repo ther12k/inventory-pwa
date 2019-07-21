@@ -66,24 +66,28 @@ export default new Vuex.Store({
 
         signInAction({ commit }, payload) {
             return new Promise((resolve, reject) => {
-                firebase
-                    .auth()
-                    .signInWithEmailAndPassword(payload.email, payload.password)
-                    .then(response => {
-                        const _uid = -1;
-                        if (response.user != undefined) {
-                            const _uid = response.user.uid;
-                        }
-                        commit('setUser', _uid);
-                        commit('setStatus', 'connected');
-                        commit('setError', null);
-                        resolve('Successful sign-in');
-                    })
-                    .catch(error => {
-                        commit('setStatus', 'failure');
-                        commit('setError', error.message);
-                        reject('Failed sign-in: ' + error);
-                    });
+                if (this.state.status == 'connected') {
+                    reject('You are already logged in!');
+                } else {
+                    firebase
+                        .auth()
+                        .signInWithEmailAndPassword(payload.email, payload.password)
+                        .then(response => {
+                            const _uid = -1;
+                            if (response.user != undefined) {
+                                const _uid = response.user.uid;
+                            }
+                            commit('setUser', _uid);
+                            commit('setStatus', 'connected');
+                            commit('setError', null);
+                            resolve('Successful sign-in');
+                        })
+                        .catch(error => {
+                            commit('setStatus', 'failure');
+                            commit('setError', error.message);
+                            reject(error);
+                        });
+                    }
             });
         },
 
